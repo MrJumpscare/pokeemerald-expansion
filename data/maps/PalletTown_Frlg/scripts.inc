@@ -210,6 +210,7 @@ PalletTown_EventScript_OakTrigger::
 	closedoor 16, 13
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
+	setvar VAR_STARTER_GENERATION, 1
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
 	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN

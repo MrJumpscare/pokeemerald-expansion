@@ -576,8 +576,93 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1, PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4, PalletTown_ProfessorOaksLab_EventScript_OakBattleMonForItToGrow
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_OakCanReachNextTownWithMon
-	msgbox PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose
+	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ChooseGen
 	release
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_ChooseGen::
+	msgbox ProfOak_ChooseGen_Text
+	closemessage
+	dynmultichoice 0, 0, TRUE, VAR_STARTER_GENERATION, 0, DYN_MULTICHOICE_CB_NONE, G1T,G2T,G3T,G4T,G5T,G6T,G7T,G8T,G9T
+	switch VAR_RESULT
+	case 0, EventScript_ChooseGen1
+	case 1, EventScript_ChooseGen2
+	case 2, EventScript_ChooseGen3
+	case 3, EventScript_ChooseGen4
+	case 4, EventScript_ChooseGen5
+	case 5, EventScript_ChooseGen6
+	case 6, EventScript_ChooseGen7
+	case 7, EventScript_ChooseGen8
+	case 8, EventScript_ChooseGen9
+	msgbox PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose
+	closemessage
+	end
+
+ProfOak_ChooseGen_Text::
+	.string "OAK: Choose a generation\n"
+	.string "for your starter!$"
+
+G1T::
+	.string "Gen 1$"
+
+G2T::
+	.string "Gen 2$"
+
+G3T::
+	.string "Gen 3$"
+
+G4T::
+	.string "Gen 4$"
+
+G5T::
+	.string "Gen 5$"
+
+G6T::
+	.string "Gen 6$"
+
+G7T::
+	.string "Gen 7$"
+
+G8T::
+	.string "Gen 8$"
+
+G9T::
+	.string "Gen 9$"
+
+EventScript_ChooseGen1::
+	setvar VAR_STARTER_GENERATION, 1
+	end
+
+EventScript_ChooseGen2::
+	setvar VAR_STARTER_GENERATION, 2
+	end
+
+EventScript_ChooseGen3::
+	setvar VAR_STARTER_GENERATION, 3
+	end
+
+EventScript_ChooseGen4::
+	setvar VAR_STARTER_GENERATION, 4
+	end
+
+EventScript_ChooseGen5::
+	setvar VAR_STARTER_GENERATION, 5
+	end
+
+EventScript_ChooseGen6::
+	setvar VAR_STARTER_GENERATION, 6
+	end
+
+EventScript_ChooseGen7::
+	setvar VAR_STARTER_GENERATION, 7
+	end
+
+EventScript_ChooseGen8::
+	setvar VAR_STARTER_GENERATION, 8
+	end
+
+EventScript_ChooseGen9::
+	setvar VAR_STARTER_GENERATION, 9
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex::
@@ -1064,11 +1149,68 @@ PalletTown_ProfessorOaksLab_Movement_RivalExit::
 	walk_down
 	step_end
 
+PalletTown_ChooseGrassStarter::
+	switch VAR_STARTER_GENERATION
+	case 2, GrassGen2
+	case 3, GrassGen3
+	case 4, GrassGen4
+	case 5, GrassGen5
+	case 6, GrassGen6
+	case 7, GrassGen7
+	case 8, GrassGen8
+	case 9, GrassGen9
+	goto GrassGen1
+
+GrassGen1::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
+	setvar VAR_GRASS_NAME, SPECIES_BULBASAUR
+	return
+
+GrassGen2::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_CHIKORITA
+	setvar VAR_GRASS_NAME, SPECIES_CHIKORITA
+	return
+
+GrassGen3::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_TREECKO
+	setvar VAR_GRASS_NAME, SPECIES_TREECKO
+	return
+
+GrassGen4::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_TURTWIG
+	setvar VAR_GRASS_NAME, SPECIES_TURTWIG
+	return
+
+GrassGen5::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_SNIVY
+	setvar VAR_GRASS_NAME, SPECIES_SNIVY
+	return
+
+GrassGen6::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_CHESPIN
+	setvar VAR_GRASS_NAME, SPECIES_CHESPIN
+	return
+
+GrassGen7::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_ROWLET
+	setvar VAR_GRASS_NAME, SPECIES_ROWLET
+	return
+
+GrassGen8::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_GROOKEY
+	setvar VAR_GRASS_NAME, SPECIES_GROOKEY
+	return
+
+GrassGen9::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_SPRIGATITO
+	setvar VAR_GRASS_NAME, SPECIES_SPRIGATITO
+	return
+
 PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
 	lock
 	faceplayer
 	setvar PLAYER_STARTER_NUM, 0
-	setvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
+	call PalletTown_ChooseGrassStarter
 	setvar RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
 	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
@@ -1080,6 +1222,9 @@ PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
 PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice::
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_FaceRight
 	waitmovement 0
+	bufferspeciesname STR_VAR_1, VAR_WATER_NAME
+	bufferspeciesname STR_VAR_2, VAR_GRASS_NAME
+	bufferspeciesname STR_VAR_3, VAR_FIRE_NAME
 	showmonpic PLAYER_STARTER_SPECIES, 10, 3
 	textcolor NPC_TEXT_COLOR_MALE
 	goto_if_eq PLAYER_STARTER_NUM, 0, PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur
@@ -1207,11 +1352,68 @@ PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur::
 	walk_in_place_faster_up
 	step_end
 
+PalletTown_ChooseWaterStarter::
+	switch VAR_STARTER_GENERATION
+	case 2, WaterGen2
+	case 3, WaterGen3
+	case 4, WaterGen4
+	case 5, WaterGen5
+	case 6, WaterGen6
+	case 7, WaterGen7
+	case 8, WaterGen8
+	case 9, WaterGen9
+	goto WaterGen1
+
+WaterGen1::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
+	setvar VAR_WATER_NAME, SPECIES_SQUIRTLE
+	return
+
+WaterGen2::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_TOTODILE
+	setvar VAR_WATER_NAME, SPECIES_TOTODILE
+	return
+
+WaterGen3::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_MUDKIP
+	setvar VAR_WATER_NAME, SPECIES_MUDKIP
+	return
+
+WaterGen4::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_PIPLUP
+	setvar VAR_WATER_NAME, SPECIES_PIPLUP
+	return
+
+WaterGen5::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_OSHAWOTT
+	setvar VAR_WATER_NAME, SPECIES_OSHAWOTT
+	return
+
+WaterGen6::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_FROAKIE
+	setvar VAR_WATER_NAME, SPECIES_FROAKIE
+	return
+
+WaterGen7::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_POPPLIO
+	setvar VAR_WATER_NAME, SPECIES_POPPLIO
+	return
+
+WaterGen8::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_SOBBLE
+	setvar VAR_WATER_NAME, SPECIES_SOBBLE
+	return
+
+WaterGen9::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_QUAXLY
+	setvar VAR_WATER_NAME, SPECIES_QUAXLY
+	return
+
 PalletTown_ProfessorOaksLab_EventScript_SquirtleBall::
 	lock
 	faceplayer
 	setvar PLAYER_STARTER_NUM, 1
-	setvar PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
+	call PalletTown_ChooseWaterStarter
 	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
 	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
@@ -1220,11 +1422,68 @@ PalletTown_ProfessorOaksLab_EventScript_SquirtleBall::
 	release
 	end
 
+PalletTown_ChooseFireStarter::
+	switch VAR_STARTER_GENERATION
+	case 2, FireGen2
+	case 3, FireGen3
+	case 4, FireGen4
+	case 5, FireGen5
+	case 6, FireGen6
+	case 7, FireGen7
+	case 8, FireGen8
+	case 9, FireGen9
+	goto FireGen1
+
+FireGen1::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
+	setvar VAR_FIRE_NAME, SPECIES_CHARMANDER
+	return
+
+FireGen2::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL
+	setvar VAR_FIRE_NAME, SPECIES_CYNDAQUIL
+	return
+
+FireGen3::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_TORCHIC
+	setvar VAR_FIRE_NAME, SPECIES_TORCHIC
+	return
+
+FireGen4::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_CHIMCHAR
+	setvar VAR_FIRE_NAME, SPECIES_CHIMCHAR
+	return
+
+FireGen5::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_TEPIG
+	setvar VAR_FIRE_NAME, SPECIES_TEPIG
+	return
+
+FireGen6::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_FENNEKIN
+	setvar VAR_FIRE_NAME, SPECIES_FENNEKIN
+	return
+
+FireGen7::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_LITTEN
+	setvar VAR_FIRE_NAME, SPECIES_LITTEN
+	return
+
+FireGen8::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_SCORBUNNY
+	setvar VAR_FIRE_NAME, SPECIES_SCORBUNNY
+	return
+
+FireGen9::
+	setvar PLAYER_STARTER_SPECIES, SPECIES_FUECOCO
+	setvar VAR_FIRE_NAME, SPECIES_FUECOCO
+	return
+
 PalletTown_ProfessorOaksLab_EventScript_CharmanderBall::
 	lock
 	faceplayer
 	setvar PLAYER_STARTER_NUM, 2
-	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
+	call PalletTown_ChooseFireStarter
 	setvar RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
 	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
@@ -1401,22 +1660,22 @@ PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet::
 	.string "Don't go away yet!$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander::
-	.string "Ah! CHARMANDER is your choice.\n"
+	.string "Ah! {STR_VAR_3} is your choice.\n"
 	.string "You should raise it patiently.\p"
 	.string "So, {PLAYER}, you're claiming the\n"
-	.string "FIRE POKéMON CHARMANDER?$"
+	.string "FIRE POKéMON {STR_VAR_3}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
-	.string "Hm! SQUIRTLE is your choice.\n"
+	.string "Hm! {STR_VAR_1} is your choice.\n"
 	.string "It's one worth raising.\p"
 	.string "So, {PLAYER}, you've decided on the\n"
-	.string "WATER POKéMON SQUIRTLE?$"
+	.string "WATER POKéMON {STR_VAR_1}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
-	.string "I see! BULBASAUR is your choice.\n"
+	.string "I see! {STR_VAR_2} is your choice.\n"
 	.string "It's very easy to raise.\p"
 	.string "So, {PLAYER}, you want to go with\n"
-	.string "the GRASS POKéMON BULBASAUR?$"
+	.string "the GRASS POKéMON {STR_VAR_2}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic::
 	.string "This POKéMON is really quite\n"

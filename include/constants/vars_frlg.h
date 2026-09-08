@@ -264,10 +264,10 @@
 #define VAR_0x40F9                 0x40F9
 #define VAR_0x40FA                 0x40FA
 #define VAR_0x40FB                 0x40FB
-#define VAR_0x40FC                 0x40FC
-#define VAR_0x40FD                 0x40FD
-#define VAR_0x40FE                 0x40FE
-#define VAR_0x40FF                 0x40FF
+#define VAR_FIRE_NAME              0x40FC
+#define VAR_GRASS_NAME             0x40FD
+#define VAR_WATER_NAME             0x40FE
+#define VAR_STARTER_GENERATION     0x40FF
 
 #define VARS_END_FRLG              0x40FF
 #define VARS_COUNT_FRLG            (VARS_END_FRLG - VARS_START_FRLG + 1)
