@@ -223,6 +223,7 @@ PalletTown_ProfessorOaksLab_ChooseStarterScene::
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalNoFairWhatAboutMe
 	msgbox PalletTown_ProfessorOaksLab_Text_OakBePatientRival
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
+	call PalletTown_ProfessorOaksLab_EventScript_ProfOak
 	releaseall
 	end
 
@@ -582,7 +583,6 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 
 PalletTown_ProfessorOaksLab_EventScript_ChooseGen::
 	msgbox ProfOak_ChooseGen_Text
-	closemessage
 	dynmultichoice 0, 0, TRUE, VAR_STARTER_GENERATION, 0, DYN_MULTICHOICE_CB_NONE, G1T,G2T,G3T,G4T,G5T,G6T,G7T,G8T,G9T
 	switch VAR_RESULT
 	case 0, EventScript_ChooseGen1
@@ -1576,6 +1576,8 @@ PalletTown_ProfessorOaksLab_Text_RivalGoChoosePlayer::
 
 PalletTown_ProfessorOaksLab_Text_RivalIllTakeThisOneThen::
 	.string "{RIVAL}: I'll take this one, then!$"
+	.string "{RIVAL}: Hey wait! Why is this\n"
+	.string "one different from {PLAYER}'s?$"
 
 PalletTown_ProfessorOaksLab_Text_RivalReceivedMonFromOak::
 	.string "{RIVAL} received the {STR_VAR_1}\n"

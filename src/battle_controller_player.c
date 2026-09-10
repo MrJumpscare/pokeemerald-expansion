@@ -2428,12 +2428,12 @@ static u32 CheckTargetTypeEffectiveness(enum BattlerId battler)
 
 static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum BattlerId battler)
 {
-    static const u8 noIcon[] =  _("");
-    static const u8 effectiveIcon[] =  _("{CIRCLE_HOLLOW}");
-    static const u8 extremeleyEffectiveIcon[] =  _("{STAR}");
-    static const u8 superEffectiveIcon[] =  _("{CIRCLE_DOT}");
+    static const u8 noIcon[] =  _(" ?");
+    // static const u8 effectiveIcon[] =  _("{CIRCLE_HOLLOW}");
+    static const u8 extremelyEffectiveIcon[] =  _("{COLOR GREEN}{UP_ARROW_2}{UP_ARROW_2}");
+    static const u8 superEffectiveIcon[] =  _("{COLOR GREEN}{UP_ARROW_2}");
     static const u8 notVeryEffectiveIcon[] = _("{COLOR RED}{DOWN_ARROW_2}");
-    static const u8 mostlyIneffectiveIcon[] =  _("{TRIANGLE_UPSIDE_DOWN}");
+    static const u8 mostlyIneffectiveIcon[] =  _("{COLOR RED}{DOWN_ARROW_2}{DOWN_ARROW_2}");
     static const u8 immuneIcon[] =  _("{BIG_MULT_X}");
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
     u8 *txtPtr;
@@ -2445,7 +2445,7 @@ static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum Bat
         switch (foeEffectiveness)
         {
         case EFFECTIVENESS_EXTREMELY_EFFECTIVE:
-            StringCopy(txtPtr, extremeleyEffectiveIcon);
+            StringCopy(txtPtr, extremelyEffectiveIcon);
             break;
         case EFFECTIVENESS_SUPER_EFFECTIVE:
             StringCopy(txtPtr, superEffectiveIcon);
@@ -2460,7 +2460,7 @@ static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum Bat
             StringCopy(txtPtr, immuneIcon);
             break;
         case EFFECTIVENESS_NORMAL:
-            StringCopy(txtPtr, effectiveIcon);
+            //StringCopy(txtPtr, effectiveIcon);
             break;
         default:
         case EFFECTIVENESS_CANNOT_VIEW:
