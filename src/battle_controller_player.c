@@ -2432,7 +2432,7 @@ static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum Bat
     static const u8 effectiveIcon[] =  _("{CIRCLE_HOLLOW}");
     static const u8 extremeleyEffectiveIcon[] =  _("{STAR}");
     static const u8 superEffectiveIcon[] =  _("{CIRCLE_DOT}");
-    static const u8 notVeryEffectiveIcon[] =  _("{TRIANGLE}");
+    static const u8 notVeryEffectiveIcon[] = _("{COLOR RED}{DOWN_ARROW_2}");
     static const u8 mostlyIneffectiveIcon[] =  _("{TRIANGLE_UPSIDE_DOWN}");
     static const u8 immuneIcon[] =  _("{BIG_MULT_X}");
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
