@@ -443,7 +443,9 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 static void TextSpeed_DrawChoices(u8 selection)
 {
     u8 styles[4];
-    s32 widthSlow, widthMid, widthFast, widthInstant, xMid, xRightMid;
+    s32 widthSlow, widthMid, widthFast, widthInstant;
+    s32 totalWidth, gap;
+    s32 xSlow, xMid, xFast, xInstant;
 
     styles[0] = 0;
     styles[1] = 0;
@@ -451,22 +453,52 @@ static void TextSpeed_DrawChoices(u8 selection)
     styles[3] = 0;
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
-
     widthSlow = GetStringWidth(FONT_NARROW, gText_TextSpeedSlow, 0);
     widthMid = GetStringWidth(FONT_NARROW, gText_TextSpeedMid, 0);
     widthFast = GetStringWidth(FONT_NARROW, gText_TextSpeedFast, 0);
     widthInstant = GetStringWidth(FONT_NARROW, gText_TextSpeedInstant, 0);
 
+    totalWidth = widthSlow + widthMid + widthFast + widthInstant;
+    gap = (198 - 104 - totalWidth) / 3;
 
-    widthMid -= 94;
-    xMid = (widthSlow - widthMid - widthFast - widthInstant) / 2 + 104;
+    xSlow = 104;
+    xMid = xSlow + widthSlow + gap;
+    xFast = xMid + widthMid + gap;
+    xInstant = xFast + widthFast + gap;
+
+    DrawOptionMenuChoice(gText_TextSpeedSlow, xSlow, YPOS_TEXTSPEED, styles[0]);
     DrawOptionMenuChoice(gText_TextSpeedMid, xMid, YPOS_TEXTSPEED, styles[1]);
-
-    xRightMid = (widthMid +widthSlow -widthFast-widthInstant) / 2 + 104;
-    DrawOptionMenuChoice(gText_TextSpeedFast, xRightMid, YPOS_TEXTSPEED, styles[2]);
-    DrawOptionMenuChoice(gText_TextSpeedInstant, GetStringRightAlignXOffset(FONT_NARROW, gText_TextSpeedInstant, 198), YPOS_TEXTSPEED, styles[3]);
+    DrawOptionMenuChoice(gText_TextSpeedFast, xFast, YPOS_TEXTSPEED, styles[2]);
+    DrawOptionMenuChoice(gText_TextSpeedInstant, xInstant, YPOS_TEXTSPEED, styles[3]);
 }
+
+// static void TextSpeed_DrawChoices(u8 selection)
+// {
+//     u8 styles[4];
+//     s32 widthSlow, widthMid, widthFast, widthInstant, xMid, xRightMid;
+
+//     styles[0] = 0;
+//     styles[1] = 0;
+//     styles[2] = 0;
+//     styles[3] = 0;
+//     styles[selection] = 1;
+
+//     DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
+
+//     widthSlow = GetStringWidth(FONT_NARROW, gText_TextSpeedSlow, 0);
+//     widthMid = GetStringWidth(FONT_NARROW, gText_TextSpeedMid, 0);
+//     widthFast = GetStringWidth(FONT_NARROW, gText_TextSpeedFast, 0);
+//     widthInstant = GetStringWidth(FONT_NARROW, gText_TextSpeedInstant, 0);
+
+
+//     widthMid -= 94;
+//     xMid = (widthSlow - widthMid - widthFast - widthInstant) / 2 + 104;
+//     DrawOptionMenuChoice(gText_TextSpeedMid, xMid, YPOS_TEXTSPEED, styles[1]);
+
+//     xRightMid = (widthSlow - widthMid - widthFast - widthInstant) / 2 + 105;
+//     DrawOptionMenuChoice(gText_TextSpeedFast, xRightMid, YPOS_TEXTSPEED, styles[2]);
+//     DrawOptionMenuChoice(gText_TextSpeedInstant, GetStringRightAlignXOffset(FONT_NARROW, gText_TextSpeedInstant, 198), YPOS_TEXTSPEED, styles[3]);
+// }
 
 static u8 BattleScene_ProcessInput(u8 selection)
 {
